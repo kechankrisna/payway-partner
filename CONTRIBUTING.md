@@ -17,26 +17,41 @@ in `.env` at the repository root (copy `.env.example`); they are skipped
 without it. **Never commit `.env`**, and keep ABA's documentation out of the
 repository: it is confidential to partners.
 
+Each block starts from the repository root and has no comments, so it can
+be pasted as is into zsh (which does not treat `#` as a comment
+interactively by default).
+
+Dart: format, offline tests (`-x integration`), then offline + sandbox.
+
 ```sh
-# Dart
-cd dart && dart pub get
-dart format lib test tool       # formatting
-dart test -x integration        # offline
-dart test                       # offline + sandbox
+cd dart
+dart pub get
+dart format lib test tool
+dart test -x integration
+dart test
+```
 
-# Node
-cd node && npm ci
-npm run test:unit               # offline
-npm test                        # offline + sandbox
-npm run lint                    # ESLint (strict, type-checked)
-npm run format                  # Prettier
+Node: offline tests, offline + sandbox, ESLint (strict, type-checked), then
+Prettier.
 
-# PHP (from the repository root)
+```sh
+cd node
+npm ci
+npm run test:unit
+npm test
+npm run lint
+npm run format
+```
+
+PHP: offline tests, offline + sandbox, PHPStan (level max), then the PER-CS
+code style check (`composer cs:fix` applies it).
+
+```sh
 composer install
-composer test:unit              # offline
-composer test                   # offline + sandbox
-composer analyse                # PHPStan, level max
-composer cs                     # code style (PER-CS); composer cs:fix to apply
+composer test:unit
+composer test
+composer analyse
+composer cs
 ```
 
 ## CI

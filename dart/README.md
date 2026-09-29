@@ -170,9 +170,12 @@ This package lives in the [payway-partner](https://github.com/kechankrisna/paywa
 repository, next to the Node and PHP SDKs; all three pass the same test
 vectors in `spec/test-vectors`.
 
+Offline unit tests and shared vectors, then the ABA sandbox tests (they need
+`../.env`, see `../.env.example`):
+
 ```sh
-dart test -x integration   # offline unit tests and shared vectors
-dart test -t integration   # ABA sandbox tests, need ../.env (see ../.env.example)
+dart test -x integration
+dart test -t integration
 ```
 
 See the `example` folder for a Flutter app (`flutter run --dart-define-from-file=../../.env`).
