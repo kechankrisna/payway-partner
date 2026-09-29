@@ -1,3 +1,8 @@
+## 2.0.1
+
+- Docs: test commands in the README are safe to paste into zsh.
+- First release published automatically from GitHub Actions.
+
 ## 2.0.0
 
 First release under the new name **`payway_partner`**, the successor of

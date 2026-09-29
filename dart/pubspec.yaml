@@ -1,6 +1,6 @@
 name: payway_partner
 description: ABA PayWay partner API client for Dart and Flutter. Register merchants, decrypt the pushback and inquire merchant info.
-version: 2.0.0
+version: 2.0.1
 repository: https://github.com/kechankrisna/payway-partner/tree/main/dart
 issue_tracker: https://github.com/kechankrisna/payway-partner/issues
 

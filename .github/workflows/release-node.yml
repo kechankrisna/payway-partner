@@ -1,5 +1,6 @@
 # Publishes node/ to npm when a tag like node-v1.0.1 is pushed.
-# One-time: configure npm trusted publishing for this workflow, or add an NPM_TOKEN secret.
+# Uses npm trusted publishing (OIDC): configure it on the package's npmjs.com
+# settings for this repository and workflow. No token is needed.
 name: release-node
 
 on:
@@ -28,7 +29,10 @@ jobs:
           version="${GITHUB_REF_NAME#node-v}"
           test "$(node -p "require('./package.json').version")" = "$version" \
             || { echo "::error::tag $GITHUB_REF_NAME does not match package.json"; exit 1; }
+      - name: npm supports trusted publishing (11.5.1+)
+        run: |
+          npm --version
+          npx --yes semver -r '>=11.5.1' "$(npm --version)" >/dev/null \
+            || npm install -g npm@latest
       - run: npm ci
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
