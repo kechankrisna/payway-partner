@@ -1,0 +1,23 @@
+# Runs the Dart, Node and PHP workflows together: on demand from the Actions
+# tab, and every Monday to catch breakage that no commit triggers (new SDK or
+# dependency releases, changes on the PayWay sandbox).
+name: all
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * 1' # Mondays 02:00 UTC
+
+permissions:
+  contents: read
+
+jobs:
+  dart:
+    uses: ./.github/workflows/dart.yml
+    secrets: inherit
+  node:
+    uses: ./.github/workflows/node.yml
+    secrets: inherit
+  php:
+    uses: ./.github/workflows/php.yml
+    secrets: inherit

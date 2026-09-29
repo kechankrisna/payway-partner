@@ -7,6 +7,10 @@ on:
   pull_request:
     paths: ['php/**', 'spec/**', 'composer.json', 'composer.lock', '.gitattributes', '.github/workflows/php.yml']
 
+  # run on demand (Actions tab), or from all.yml
+  workflow_dispatch:
+  workflow_call:
+
 permissions:
   contents: read
 

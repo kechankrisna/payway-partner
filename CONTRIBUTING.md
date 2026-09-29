@@ -35,6 +35,16 @@ composer test                   # offline + sandbox
 composer analyse                # PHPStan, level max
 ```
 
+## CI
+
+Each SDK has its own workflow (`dart.yml`, `node.yml`, `php.yml`) that runs on
+pushes and pull requests touching its folder or `spec/`. `all.yml` runs the
+three together: start it from the Actions tab (**all → Run workflow**), and
+it also runs every Monday to catch breakage no commit triggers, such as new
+SDK or dependency releases or changes on the PayWay sandbox. GitHub pauses
+scheduled workflows after 60 days without repository activity; re-enable
+them from the Actions tab.
+
 ## Changing behaviour
 
 1. If the change is observable (a field, a header, an error), add or update a
