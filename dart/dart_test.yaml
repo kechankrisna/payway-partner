@@ -1,0 +1,4 @@
+tags:
+  # calls the ABA PayWay sandbox; needs .env credentials
+  integration:
+    timeout: 2x

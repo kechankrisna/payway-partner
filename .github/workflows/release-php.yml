@@ -1,0 +1,21 @@
+# Packagist publishes PHP releases itself, from plain tags like v1.0.1, via its
+# GitHub webhook. This workflow only checks the tag matches Version::SDK_VERSION.
+name: release-php
+
+on:
+  push:
+    tags: ['v[0-9]+.[0-9]+.[0-9]+*']
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tag matches Version::SDK_VERSION
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          grep -q "SDK_VERSION = '$version';" php/src/Version.php \
+            || { echo "::error::tag $GITHUB_REF_NAME does not match php/src/Version.php"; exit 1; }

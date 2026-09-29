@@ -1,0 +1,19 @@
+{
+  "description": "Documented PayWay partner status codes.",
+  "codes": {
+    "success": "00",
+    "wrongHash": "PTL02",
+    "parameterValidationRequired": "PTL04",
+    "requestExpired": "PTL06",
+    "merchantNotFound": "PTL46",
+    "partnerIdNotFound": "PTL137",
+    "redirectUrlEmpty": "PTL141",
+    "pushbackUrlEmpty": "PTL142",
+    "registerRefAlreadyExists": "PTL164",
+    "registerRefEmpty": "PTL165",
+    "registerRefInvalidFormat": "PTL166",
+    "profileDeactivated": "PTL170",
+    "invalidRequestData": "PTL171",
+    "domainNotWhitelisted": "PTL175"
+  }
+}

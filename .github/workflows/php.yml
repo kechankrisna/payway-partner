@@ -1,0 +1,48 @@
+name: php
+
+on:
+  push:
+    branches: [main]
+    paths: ['php/**', 'spec/**', 'composer.json', 'composer.lock', '.gitattributes', '.github/workflows/php.yml']
+  pull_request:
+    paths: ['php/**', 'spec/**', 'composer.json', 'composer.lock', '.gitattributes', '.github/workflows/php.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.3', '8.4']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: openssl, curl, json
+          coverage: none
+      - run: composer validate --strict
+      - run: composer install --no-progress
+      - run: composer audit
+      - run: composer analyse
+      - name: Unit tests and shared vectors
+        run: composer test:unit
+
+      - name: Dist archive holds only the PHP SDK
+        run: |
+          git archive HEAD | tar -t > files.txt
+          if grep -Eq '^(dart|node|spec)/|^php/tests/' files.txt; then
+            cat files.txt
+            echo "::error::.gitattributes export-ignore rules are leaking files into the Composer package"
+            exit 1
+          fi
+
+      - name: Sandbox integration tests
+        env:
+          ABA_SANDBOX_ENV: ${{ secrets.ABA_SANDBOX_ENV }}
+        if: env.ABA_SANDBOX_ENV != '' && matrix.php == '8.4'
+        run: |
+          printf '%s\n' "$ABA_SANDBOX_ENV" > .env
+          vendor/bin/phpunit -c php/phpunit.xml.dist --group integration

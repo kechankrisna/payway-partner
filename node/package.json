@@ -1,0 +1,57 @@
+{
+  "name": "@kechankrisna/payway-partner",
+  "version": "1.0.0",
+  "description": "ABA PayWay partner API client for Node.js. Register merchants, decrypt the pushback and inquire merchant info.",
+  "keywords": [
+    "aba",
+    "payway",
+    "cambodia",
+    "payment",
+    "partner",
+    "sdk"
+  ],
+  "license": "MIT",
+  "author": "Ke Chankrisna",
+  "homepage": "https://github.com/kechankrisna/payway-partner/tree/main/node#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kechankrisna/payway-partner.git",
+    "directory": "node"
+  },
+  "bugs": "https://github.com/kechankrisna/payway-partner/issues",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:unit": "vitest run --exclude test/integration.test.ts",
+    "prepublishOnly": "npm run typecheck && npm run test:unit && npm run build"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.2"
+  }
+}

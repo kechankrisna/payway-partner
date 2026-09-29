@@ -1,0 +1,103 @@
+{
+  "description": "Decrypt ciphertext with private_key (from spec/fixtures); the result is the JSON in expected. pushback cases are full pushback bodies.",
+  "cases": [
+    {
+      "name": "merchant_credential",
+      "private_key": "rsa_1024_private.pem",
+      "ciphertext": "Sgegq8ZqjJDGoZXMYWl6Rwv+nRitGOiSuMqnNijVpHuSCL97qhbUVsYGF2C0wrH85ARpyEINgP9WbSCYNqMhWXf1byPQe8y5+Z3a91Ol3k+R4o6K6Amu4xdwy6cyoeL0mXumDv4TQRMPcIM45ITt8s4LI2PaLlF/A37EzpfNFbyxcHl8PM0HjiursPw0hY/oYA4YEB5HW0X37FcDDBmZMsV5Zg+7U3mNVGiG674mXeM475F9sVkgiFXeGwlyNJFq6BtCbnmxVeuIhUcgZk6DUCfQIfdz7WRqwPS3Nv5CDIaLTer68qsdGHLHq5WvfGQSHgwNpGdVRPM2Q31Kl84QTQ==",
+      "expected": {
+        "partner_name": "Test Partner",
+        "merchant_name": "Test Outlet",
+        "mid": "000000000000001",
+        "merchant_key": "mk-1",
+        "public_key": "pk-1",
+        "register_ref": "ref-001",
+        "currency": "USD",
+        "rsa_public_key": "rsa-1"
+      }
+    },
+    {
+      "name": "merchant_info_multi_block_khmer",
+      "private_key": "rsa_1024_private.pem",
+      "ciphertext": "NoiBRLIdQMS5GQwMlQgR/a/oRTQ8ke0JplZFiZJanZ9ne+adU9EMrObaxlHtuyXQAu2JiQu3TEsSK968PRPor+SihfvV4IXdnYXH0kW40WnSTOPZrMFXCeX3Vl4Nyk09tCFyPMjxX7QyeMKR9Mf1w0C/4tU8F0XBkHpIvkPCXJQpBN2HhgrkczzcEvWbVBur+TOKRPFKGyM/LZundQaJO6iTaXTxQLGhzgX3+bw0rpqBohW5ceUpyVpYqkyM82AMe3lHI3UtVis8G7jX0GIAV/E6eh1D4SrO/gpEPKvDamEJld81K2l7MrQAXsPob7s1eZ1V6Bqq2+SV6rTzMLFj9xelsxIMm6o3eSKm4l0qdx5Y5Lk1xASl/Pl4jmdqDnKtRpUubdPJ7dn4D0sndDkJoLQBQaO7jHVm+wav6E7W6gUELIAvOZosccNYJgw5ggt/49Po4ccZdkZmRAHzqaVYGbDtk7nGwcUBYIqMyjJvctxFY9IOgEdpxI5Rvy60vRpnY7pvTkO8D27HklHIPJImw9LjfencedGcYbjM2RLdZ9U8Ax9sMjoI8CF/qV5j6cVi3uFu1ph2LdSqmEDLwJp44EFVKb0o5Db8Kxy7aOu/yUgBnfT2cJKOQjXXibxJEKQ4xUT6xAOXFl0EkXXxjbgeNJskgiAE5zHw7VmbSDIXzdMeXnA5ghKXwEwpmGLV0GzFYl7hiFEj9/Vf10EcSpbcyfi9Hxl+xlu0lBD1dFGsC2IonJntAKVrffuT0Kk3CRkfqsNsCrnDtexy4MxsLxdXy02AJFOSrmcGgO4FTDdB3K9AVgzuEXRPgwv6cHYUfaOsFA76HvmwV1FZX7HjnuNdIEr1Jh4ugLVOqNIPTcbR/cf4NWXPMXWfx4zkOZHJhJKCBKM0paFwLvDsPYydXyh51nbspqtQu+Id6aWodIFXeHaLIuCqp5E8SVWKdLDE93IxPuLb+CVVKtCKf7xPK4guBd7TTDQY7A7LZgVz7JiLdFahuPNxSmml3+QV+MCYZ26yWb4oN07FpQ/xc3Zpk0lgAjrb0LzDdXAiYgkuYIa3WJ6ziO091sDgiJj4iubh9HLzssTJap3ABtwC581be6dFL6QaiiUtbVGGgFiGbdpvD/K4q7I+P4ZNqfHskD8jD4EukMLAKyhCNarQi5OymewhRvaNiK1NWe/mf8i5kwS4pSA=",
+      "expected": {
+        "outlet_name": "ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ",
+        "aba_account_khr": "",
+        "aba_account_usd": "000000001",
+        "available_payment_methods": {
+          "alipay": "Alipay",
+          "wechat": "WeChat Pay"
+        },
+        "enabled_payment_methods": {
+          "abapay_khqr": "ABA Pay KHQR"
+        },
+        "pending_payment_methods": []
+      }
+    },
+    {
+      "name": "key_2048",
+      "private_key": "rsa_2048_private.pem",
+      "ciphertext": "HYgW2lcprmxfi4ekXFMDUqL+0eR3cZEmggE3vj4AMWppIF6tR/FmhS6sgnFSAVfIToFMDWecV7RGoI3DmFP32/T1mLb1GMWWCHuJBKfXt9Rww4xHCewKUZmBpeQWJfGSSKr/Q1Pv+lAmfZwshDx8yT+VXcK4sb2XSDxYagck0htpy28v904wRD8vPD33vFQ3F2eQieeI972HhpcFrwfVca3hjrNi2ShwhLwC3cHsmW3T10QO/0ZXcFo/mrxEgqp8cKwdm9N3mGrK5KSaEIVtAXzl++QcZ1r3DL2Q3/yiL0z5MzGuJf7IaiFQyfp+4B3PuQriUw6KzkNuQE6FtBU11w==",
+      "expected": {
+        "partner_name": "Test Partner",
+        "merchant_name": "Test Outlet",
+        "mid": "000000000000001",
+        "merchant_key": "mk-1",
+        "public_key": "pk-1",
+        "register_ref": "ref-001",
+        "currency": "USD",
+        "rsa_public_key": "rsa-1"
+      }
+    },
+    {
+      "name": "pkcs8_private_key",
+      "private_key": "rsa_1024_private_pkcs8.pem",
+      "ciphertext": "brKXcrmamlxM1ybbf/r6aiTLz0OBENXAV4r7qTUzNtT8tyrw+iJSSmuCzkI9Ei9q9DMuHaEQ7s+h9VIRhWVl1QOxpJqO4CZanzUzhCAO931f1WJdyjIrPM3DRl/daA0AXk0RYW5UVdjdBKDUWWnD4DR1C6s7TwCvoTNZ9d6PGYBQL94KYehDFFXHbiEFxWvOlKtO0MgB37WXxkqGg/xXTmFLYEfBAtQCEvMz3kMvqRLbxnKYKQwesMpgBIkhfdVrZH+IJ5R3cML8wLCVYDGEcQq4Fii7u/JqY9GUy8cQXiwPSJo11cK8D0uIMSuP0H9x1smshms/0Avqq4AwzSfl9w==",
+      "expected": {
+        "partner_name": "Test Partner",
+        "merchant_name": "Test Outlet",
+        "mid": "000000000000001",
+        "merchant_key": "mk-1",
+        "public_key": "pk-1",
+        "register_ref": "ref-001",
+        "currency": "USD",
+        "rsa_public_key": "rsa-1"
+      }
+    }
+  ],
+  "pushback": [
+    {
+      "name": "valid",
+      "private_key": "rsa_1024_private.pem",
+      "body": "{\"return_params\":\"HqSu/4BemKsYikQTlvoKDEFaUh05DAhFDD+fros40qHHEL4F476/vs3ReJE52MOU0BSbp73gE0jqNBr68H/cfV1OgHON1WMNqH41OC3DHKAIVCY9A/3wHEQQ/LhRjRM1S2Km46eEY4JTodZp4ndDQNuO9F4phUzCn/64Le/frwaUQ7O5XRYAvoedgP8O95yfWs3ciOqwugISk0DPoRRo/4LTuYIenRM4jG7Fal3HBOS7JtkXlBbFWZrVlyEUZU/gq5lSZAjQza/PEoIgDRVn6211y+3MY5obvrqNrXYOFeUHfATvtju/K3wbqORH+Ll4ySpb5ptne+rrvk/I+TlpCA==\"}",
+      "expected": {
+        "partner_name": "Test Partner",
+        "merchant_name": "Test Outlet",
+        "mid": "000000000000001",
+        "merchant_key": "mk-1",
+        "public_key": "pk-1",
+        "register_ref": "ref-001",
+        "currency": "USD",
+        "rsa_public_key": "rsa-1"
+      }
+    },
+    {
+      "name": "missing_return_params",
+      "private_key": "rsa_1024_private.pem",
+      "body": "{}",
+      "expected_error": "invalidPushback"
+    },
+    {
+      "name": "not_json",
+      "private_key": "rsa_1024_private.pem",
+      "body": "not json",
+      "expected_error": "invalidPushback"
+    },
+    {
+      "name": "wrong_key",
+      "private_key": "rsa_1024_private.pem",
+      "body": "{\"return_params\":\"LegrnNp1NmOUp3FyDhynglnNk/yEqGS/8fSyQzPkYftdYtWCRvIUkhGkE2hbZjLDM8X1MZmTNrOXtgdVgTKULfUR0h+l36Ka9GO9B9Cb7COcdWkdNgdENWru93LnutPh1hqosdZjTrn7An45wPDaEk1EBVJxtk8Isy9eQCygmp8HE/6qPeOwta3jh7Rf8OtwkV7ofLlWaFR58MTNH8KKi51cg+suEOPWbdx3P5BDPp8SEdPS6WNle1EueHx09ZwyAkc3rpggrg/rU4yxVr2KFmqo0xM8yxz3WpkYDO3ydY8euMUYg5KwMDjfCr81EpMUi/cRHlFFyXP13uKIHzs8ew==\"}",
+      "expected_error": "decryption"
+    }
+  ]
+}

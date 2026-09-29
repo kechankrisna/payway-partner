@@ -1,0 +1,31 @@
+{
+  "description": "Decrypted get-mc-info data and the payment method maps the SDK returns. PHP encodes an empty map as [].",
+  "cases": [
+    {
+      "name": "empty_methods_as_list",
+      "data": {
+        "outlet_name": "ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ហាងកាហ្វេ ",
+        "aba_account_khr": "",
+        "aba_account_usd": "000000001",
+        "available_payment_methods": {
+          "alipay": "Alipay",
+          "wechat": "WeChat Pay"
+        },
+        "enabled_payment_methods": {
+          "abapay_khqr": "ABA Pay KHQR"
+        },
+        "pending_payment_methods": []
+      },
+      "expected": {
+        "available_payment_methods": {
+          "alipay": "Alipay",
+          "wechat": "WeChat Pay"
+        },
+        "enabled_payment_methods": {
+          "abapay_khqr": "ABA Pay KHQR"
+        },
+        "pending_payment_methods": {}
+      }
+    }
+  ]
+}

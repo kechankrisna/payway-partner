@@ -1,0 +1,54 @@
+name: node
+
+on:
+  push:
+    branches: [main]
+    paths: ['node/**', 'spec/**', '.github/workflows/node.yml']
+  pull_request:
+    paths: ['node/**', 'spec/**', '.github/workflows/node.yml']
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: node
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: node/package-lock.json
+      - run: npm ci
+      - run: npm audit --omit=dev
+      - run: npm run typecheck
+      - name: Unit tests and shared vectors
+        run: npm run test:unit
+      - run: npm run build
+      - run: npm pack --dry-run
+
+  sandbox:
+    runs-on: ubuntu-latest
+    env:
+      ABA_SANDBOX_ENV: ${{ secrets.ABA_SANDBOX_ENV }}
+    steps:
+      - uses: actions/checkout@v4
+        if: env.ABA_SANDBOX_ENV != ''
+      - uses: actions/setup-node@v4
+        if: env.ABA_SANDBOX_ENV != ''
+        with:
+          node-version: 24
+      - name: Sandbox integration tests
+        if: env.ABA_SANDBOX_ENV != ''
+        run: |
+          printf '%s\n' "$ABA_SANDBOX_ENV" > ../.env
+          npm ci
+          npx vitest run test/integration.test.ts

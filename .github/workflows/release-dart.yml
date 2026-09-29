@@ -1,0 +1,15 @@
+# Publishes dart/ to pub.dev when a tag like dart-v2.0.1 is pushed.
+# One-time: enable automated publishing on pub.dev with tag pattern dart-v{{version}}.
+name: release-dart
+
+on:
+  push:
+    tags: ['dart-v[0-9]+.[0-9]+.[0-9]+*']
+
+jobs:
+  publish:
+    permissions:
+      id-token: write
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with:
+      working-directory: dart

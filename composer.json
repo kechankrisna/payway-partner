@@ -1,0 +1,47 @@
+{
+    "name": "kechankrisna/payway-partner",
+    "description": "ABA PayWay partner API client for PHP. Register merchants, decrypt the pushback and inquire merchant info.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["aba", "payway", "cambodia", "payment", "partner", "sdk"],
+    "homepage": "https://github.com/kechankrisna/payway-partner/tree/main/php",
+    "authors": [
+        {"name": "Ke Chankrisna"}
+    ],
+    "support": {
+        "issues": "https://github.com/kechankrisna/payway-partner/issues",
+        "source": "https://github.com/kechankrisna/payway-partner"
+    },
+    "require": {
+        "php": ">=8.3",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "psr/clock": "^1.0",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.0",
+        "psr/http-message": "^1.1 || ^2.0",
+        "psr/log": "^2.0 || ^3.0"
+    },
+    "suggest": {
+        "ext-curl": "Needed by the built-in HTTP client, unless you pass a PSR-18 client"
+    },
+    "autoload": {
+        "psr-4": {"Kechankrisna\\PaywayPartner\\": "php/src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {"Kechankrisna\\PaywayPartner\\Tests\\": "php/tests/"}
+    },
+    "scripts": {
+        "test": "phpunit -c php/phpunit.xml.dist",
+        "test:unit": "phpunit -c php/phpunit.xml.dist --exclude-group integration",
+        "analyse": "phpstan analyse -c php/phpstan.neon"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "require-dev": {
+        "nyholm/psr7": "^1.8",
+        "phpstan/phpstan": "^2",
+        "phpunit/phpunit": "^12"
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "description": "hash = hex HMAC-SHA256(partner_id + request_data + request_time, partner_key)",
+  "cases": [
+    {
+      "partner_id": "test-partner-id",
+      "partner_key": "test-partner-key",
+      "request_data": "abc",
+      "request_time": "20260102030405",
+      "expected_hash": "12de2c5b6b92b4c597b374c49fb9decd00cf02c5f954e303263e0aa50bb963db"
+    },
+    {
+      "partner_id": "test-partner-id",
+      "partner_key": "test-partner-key",
+      "request_data": "Uyv+FcEc+QHD3UO/WYhBFH6l02Z0DVTN==",
+      "request_time": "20260102030405",
+      "expected_hash": "e859c87ee667cb8d676fc4cbf22d957a4011bfec027a7cc078080a4876805c1d"
+    }
+  ]
+}

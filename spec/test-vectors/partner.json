@@ -1,0 +1,9 @@
+{
+  "description": "Partner used by the vectors; keys are in spec/fixtures.",
+  "partner_id": "test-partner-id",
+  "partner_key": "test-partner-key",
+  "public_key": "rsa_1024_public.pem",
+  "private_key": "rsa_1024_private.pem",
+  "referer": "https://partner.test",
+  "base_url": "https://payway.test"
+}

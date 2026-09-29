@@ -1,0 +1,17 @@
+{
+  "description": "request_time is the UTC time as YYYYMMDDHHmmss.",
+  "cases": [
+    {
+      "utc": "2026-01-02T03:04:05.000Z",
+      "expected": "20260102030405"
+    },
+    {
+      "utc": "2026-12-31T23:59:59.000Z",
+      "expected": "20261231235959"
+    },
+    {
+      "utc": "2000-02-29T00:00:00.000Z",
+      "expected": "20000229000000"
+    }
+  ]
+}

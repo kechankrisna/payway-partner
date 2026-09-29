@@ -1,0 +1,25 @@
+# secrets: sandbox credentials for the integration tests
+.env
+.env.*
+!.env.example
+
+# ABA PayWay partner docs are confidential (partner access only)
+.aba-docs/
+
+# PHP
+/vendor/
+/.phpunit.cache/
+
+# Node
+node_modules/
+node/dist/
+*.tgz
+
+# Dart / Flutter
+.dart_tool/
+build/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/

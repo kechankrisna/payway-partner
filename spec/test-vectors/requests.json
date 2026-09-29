@@ -1,0 +1,103 @@
+{
+  "description": "Signed request bodies. request_data is RSA-encrypted with a random padding, so decrypt it with the partner private key and compare with expected_payload. body_keys is the exact key order. For get_mc_info, decrypt rsa_public_key_hash_encrypt with rsa_2048_private.pem and compare with expected_rsa_public_key_hash.",
+  "request_time": "20260102030405",
+  "cases": [
+    {
+      "name": "register_merchant_minimal",
+      "endpoint": "/api/merchant-portal/online-self-activation/new-merchant",
+      "input": {
+        "pushback_url": "https://partner.test/pushback",
+        "redirect_url": "https://partner.test",
+        "register_ref": "ref-001",
+        "currency": "USD"
+      },
+      "body_keys": [
+        "request_time",
+        "request_data",
+        "partner_id",
+        "reference_id",
+        "hash"
+      ],
+      "expected_extra": {
+        "reference_id": "ref-001"
+      },
+      "expected_payload": {
+        "pushback_url": "https://partner.test/pushback",
+        "redirect_url": "https://partner.test",
+        "type": 0,
+        "register_ref": "ref-001",
+        "currency": "USD"
+      }
+    },
+    {
+      "name": "register_merchant_full",
+      "endpoint": "/api/merchant-portal/online-self-activation/new-merchant",
+      "input": {
+        "pushback_url": "https://partner.test/pushback",
+        "redirect_url": "{\"ios_scheme\":\"app://done\",\"android_scheme\":\"app://done\"}",
+        "register_ref": "ref_002",
+        "currency": "KHR",
+        "type": 1,
+        "merchant_type": 0
+      },
+      "body_keys": [
+        "request_time",
+        "request_data",
+        "partner_id",
+        "reference_id",
+        "hash"
+      ],
+      "expected_extra": {
+        "reference_id": "ref_002"
+      },
+      "expected_payload": {
+        "pushback_url": "https://partner.test/pushback",
+        "redirect_url": "{\"ios_scheme\":\"app://done\",\"android_scheme\":\"app://done\"}",
+        "type": 1,
+        "register_ref": "ref_002",
+        "merchant_type": 0,
+        "currency": "KHR"
+      }
+    },
+    {
+      "name": "check_merchant",
+      "endpoint": "/api/merchant-portal/online-self-activation/get-mc-credential-info",
+      "input": {
+        "register_ref": "ref-001"
+      },
+      "body_keys": [
+        "request_time",
+        "request_data",
+        "partner_id",
+        "hash"
+      ],
+      "expected_extra": {},
+      "expected_payload": {
+        "register_ref": "ref-001"
+      }
+    },
+    {
+      "name": "get_mc_info",
+      "endpoint": "/api/merchant-portal/online-self-activation/get-mc-info",
+      "input": {
+        "merchant_key": "EC0002",
+        "currency": "USD",
+        "public_key": "merchant-public-key",
+        "rsa_public_key": "rsa_2048_public.pem"
+      },
+      "body_keys": [
+        "request_time",
+        "request_data",
+        "partner_id",
+        "hash"
+      ],
+      "expected_extra": {},
+      "expected_payload": {
+        "merchant_key": "EC0002",
+        "currency": "USD",
+        "public_key_hash_encrypt": "9359a781c652d5466de6ec86c3a3e674f0e4fe25c7cbbef2308c34ac80ee44de935efe582806d4828018f0b9af0faa30c9512dcde03317c5e3fde427b4dcd71b"
+      },
+      "expected_rsa_public_key_hash": "test-partner-idEC000220260102030405"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+include: package:lints/recommended.yaml
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-raw-types: true
+
+linter:
+  rules:
+    # every public API member is documented (checked in CI)
+    - public_member_api_docs
+    - always_declare_return_types
+    - prefer_final_locals
+    - unawaited_futures
+
+# For more information about the core and recommended set of lints, see
+# https://dart.dev/go/core-lints

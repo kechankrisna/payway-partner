@@ -1,0 +1,41 @@
+{
+  "description": "Lowercase hex HMAC, like PHP hash_hmac().",
+  "cases": [
+    {
+      "algorithm": "sha256",
+      "key": "key",
+      "message": "message",
+      "expected": "6e9ef29b75fffc5b7abae527d58fdadb2fe42e7219011976917343065f58ed4a"
+    },
+    {
+      "algorithm": "sha512",
+      "key": "key",
+      "message": "message",
+      "expected": "e477384d7ca229dd1426e64b63ebf2d36ebd6d7e669a6735424e72ea6c01d3f8b56eb39c36d8232f5427999b8d1a3f9cd1128fc69f4d75b434216810fa367e98"
+    },
+    {
+      "algorithm": "sha256",
+      "key": "test-partner-key",
+      "message": "test-partner-idabc20260102030405",
+      "expected": "12de2c5b6b92b4c597b374c49fb9decd00cf02c5f954e303263e0aa50bb963db"
+    },
+    {
+      "algorithm": "sha512",
+      "key": "test-partner-key",
+      "message": "test-partner-idabc20260102030405",
+      "expected": "35f66262cee84d99e5aebe4c242cb9d34a81c7f422213379a4454c8a6e816107faa862a7b8b4a6b0cd14963e87e38f327b5750e6169ab8c7495eaa7abe9f79d4"
+    },
+    {
+      "algorithm": "sha256",
+      "key": "ключ",
+      "message": "ហាងកាហ្វេ",
+      "expected": "4d5a6014593ce21df0d4e39a992999c5655fa7387a9514e320ab4d845b5bfb6e"
+    },
+    {
+      "algorithm": "sha512",
+      "key": "ключ",
+      "message": "ហាងកាហ្វេ",
+      "expected": "64bc43d02bb60d27b8e842037efb241dc0fea48174cbd993cd2d683e8b9de7e3f4742cd0423844abf414d089e7cb987fc37e9130e4be5dedcf67dccb4dda19e3"
+    }
+  ]
+}

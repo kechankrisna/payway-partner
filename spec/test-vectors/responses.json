@@ -1,0 +1,119 @@
+{
+  "description": "HTTP replies from PayWay and what the SDK returns. PayWay sends errors as non-2xx with a JSON status body, which is a normal response. expected.status uses PayWay field names; absent ids are omitted. Values documented as strings are read as strings.",
+  "cases": [
+    {
+      "name": "register_success",
+      "endpoint": "register_merchant",
+      "http_status": 200,
+      "body": {
+        "url": " https://payway.test/self-register?partner-token=t",
+        "token": "t",
+        "status": {
+          "code": "00",
+          "message": "Success!",
+          "tran_id": "x-1"
+        }
+      },
+      "expected": {
+        "url": "https://payway.test/self-register?partner-token=t",
+        "token": "t",
+        "is_success": true,
+        "status": {
+          "code": "00",
+          "message": "Success!",
+          "tran_id": "x-1"
+        }
+      }
+    },
+    {
+      "name": "inquiry_merchant_not_found_403",
+      "endpoint": "check_merchant",
+      "http_status": 403,
+      "body": {
+        "status": {
+          "code": "PTL46",
+          "message": "Merchant not found",
+          "tran_id": "1790695069292980"
+        }
+      },
+      "expected": {
+        "data": "",
+        "is_success": false,
+        "status": {
+          "code": "PTL46",
+          "message": "Merchant not found",
+          "tran_id": "1790695069292980"
+        }
+      }
+    },
+    {
+      "name": "inquiry_wrong_hash_with_trace_ids",
+      "endpoint": "get_mc_info",
+      "http_status": 403,
+      "body": {
+        "status": {
+          "code": "PTL02",
+          "message": "Wrong Hash",
+          "trace_id": "t-1",
+          "correlation_id": "c-1"
+        }
+      },
+      "expected": {
+        "data": "",
+        "is_success": false,
+        "status": {
+          "code": "PTL02",
+          "message": "Wrong Hash",
+          "trace_id": "t-1",
+          "correlation_id": "c-1"
+        }
+      }
+    },
+    {
+      "name": "numbers_read_as_strings",
+      "endpoint": "check_merchant",
+      "http_status": 200,
+      "body": {
+        "data": "abc",
+        "status": {
+          "code": 0,
+          "message": "ok",
+          "tran_id": 12345
+        }
+      },
+      "expected": {
+        "data": "abc",
+        "is_success": false,
+        "status": {
+          "code": "0",
+          "message": "ok",
+          "tran_id": "12345"
+        }
+      }
+    },
+    {
+      "name": "html_error_page_502",
+      "endpoint": "check_merchant",
+      "http_status": 502,
+      "raw_body": "<html>Bad Gateway</html>",
+      "expected_error": {
+        "type": "unexpectedResponse",
+        "status_code": 502,
+        "retryable": true
+      }
+    },
+    {
+      "name": "json_without_status_200",
+      "endpoint": "check_merchant",
+      "http_status": 200,
+      "body": {
+        "unexpected": true
+      },
+      "expected_error": {
+        "type": "unexpectedResponse",
+        "status_code": 200,
+        "retryable": false
+      }
+    }
+  ]
+}
