@@ -6,7 +6,8 @@ import type { PaywayPartner, PaywayStatus } from '../src/index.js';
 const spec = (path: string) =>
   fileURLToPath(new URL(`../../spec/${path}`, import.meta.url));
 
-/** a file of spec/test-vectors */
+/** a file of spec/test-vectors, typed by the caller */
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- JSON fixtures are typed at the call site
 export function vectors<T = Record<string, unknown>>(name: string): T {
   return JSON.parse(readFileSync(spec(`test-vectors/${name}`), 'utf8')) as T;
 }
@@ -61,9 +62,11 @@ export function fakeFetch(
   const fn = async (input: string | URL | Request, init?: RequestInit) => {
     const request = new Request(input, init);
     requests.push(request);
-    bodies.push(JSON.parse(await request.clone().text()) as Record<string, string>);
+    bodies.push(
+      JSON.parse(await request.clone().text()) as Record<string, string>,
+    );
     init?.signal?.throwIfAborted();
     return reply(request);
   };
-  return Object.assign(fn as typeof fetch, { requests, bodies });
+  return Object.assign(fn, { requests, bodies });
 }

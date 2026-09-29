@@ -11,6 +11,78 @@ vectors.
 | Node.js (TypeScript) | [`@kechankrisna/payway-partner`](https://www.npmjs.com/package/@kechankrisna/payway-partner) | `npm install @kechankrisna/payway-partner` | [node/](node/README.md) |
 | PHP | [`kechankrisna/payway-partner`](https://packagist.org/packages/kechankrisna/payway-partner) | `composer require kechankrisna/payway-partner` | [php/](php/README.md) |
 
+## Quick start
+
+Every SDK takes the same partner credentials from ABA and exposes the same
+calls. Full guides: [Dart](dart/README.md) · [Node](node/README.md) ·
+[PHP](php/README.md).
+
+### PHP
+
+```sh
+composer require kechankrisna/payway-partner
+```
+
+```php
+use Kechankrisna\PaywayPartner\Model\RegisterMerchantRequest;
+use Kechankrisna\PaywayPartner\PaywayPartner;
+use Kechankrisna\PaywayPartner\PaywayPartnerService;
+
+$payway = new PaywayPartnerService(new PaywayPartner(
+    partnerName: 'your partner name',
+    partnerId: 'partner id provided by ABA',
+    partnerKey: getenv('ABA_PARTNER_KEY'),
+    partnerPrivateKey: file_get_contents('/secure/partner-private.pem'),
+    partnerPublicKey: file_get_contents('/secure/partner-public.pem'),
+    partnerReferer: 'https://your-whitelisted-domain.com',
+    baseApiUrl: PaywayPartner::SANDBOX_URL,
+));
+
+// 1. register, then redirect the merchant to the onboarding form
+$response = $payway->registerMerchant(new RegisterMerchantRequest(
+    pushbackUrl: 'https://your-domain.com/payway/pushback',
+    redirectUrl: 'https://your-domain.com',
+    registerRef: 'merchant-001',
+    currency: 'USD',
+));
+if ($response->isSuccess()) {
+    header('Location: ' . $response->url);
+}
+
+// 2. on your pushback_url: decrypt and store the merchant credentials
+$credential = $payway->decryptPushback(file_get_contents('php://input'));
+```
+
+### Node.js
+
+```ts
+import { PAYWAY_SANDBOX_URL, PaywayPartnerService } from '@kechankrisna/payway-partner';
+
+const payway = new PaywayPartnerService({ partner: { /* same credentials */ baseApiUrl: PAYWAY_SANDBOX_URL } });
+const response = await payway.registerMerchant({
+  pushbackUrl: 'https://your-domain.com/payway/pushback',
+  redirectUrl: 'https://your-domain.com',
+  registerRef: 'merchant-001',
+  currency: 'USD',
+});
+```
+
+### Dart
+
+```dart
+import 'package:payway_partner/payway_partner.dart';
+
+final payway = PaywayPartnerService(partner: partner); // same credentials
+final response = await payway.registerMerchant(
+  merchant: const PaywayPartnerRegisterMerchant(
+    pushbackUrl: 'https://your-domain.com/payway/pushback',
+    redirectUrl: 'https://your-domain.com',
+    registerRef: 'merchant-001',
+    currency: 'USD',
+  ),
+);
+```
+
 ## Features
 
 | Feature | Dart | Node | PHP |

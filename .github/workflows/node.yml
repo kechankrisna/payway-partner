@@ -34,6 +34,10 @@ jobs:
       - run: npm ci
       - run: npm audit --omit=dev
       - run: npm run typecheck
+      - name: Lint (ESLint)
+        run: npm run lint
+      - name: Formatting (Prettier)
+        run: npm run format:check
       - name: Unit tests and shared vectors
         run: npm run test:unit
       - run: npm run build

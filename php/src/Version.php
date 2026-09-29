@@ -10,7 +10,5 @@ final class Version
     /** Kept in sync with the git tag by php/tests/UnitTest.php and CI. */
     public const string SDK_VERSION = '1.0.0';
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

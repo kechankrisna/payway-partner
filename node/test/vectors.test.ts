@@ -22,14 +22,15 @@ import {
   vectors,
 } from './helpers.js';
 
-type Cases<T> = { cases: T[] };
+interface Cases<T> {
+  cases: T[];
+}
 const crypto = new NodePaywayPartnerCrypto();
 const partner = testPartner();
 
 describe('request_time', () => {
-  const file = vectors<Cases<{ utc: string; expected: string }>>(
-    'request_time.json',
-  );
+  const file =
+    vectors<Cases<{ utc: string; expected: string }>>('request_time.json');
   for (const c of file.cases) {
     it(c.utc, () => {
       expect(formatRequestTime(new Date(c.utc))).toBe(c.expected);
@@ -39,7 +40,12 @@ describe('request_time', () => {
 
 describe('hmac', () => {
   const file = vectors<
-    Cases<{ algorithm: string; key: string; message: string; expected: string }>
+    Cases<{
+      algorithm: string;
+      key: string;
+      message: string;
+      expected: string;
+    }>
   >('hmac.json');
   for (const c of file.cases) {
     it(`${c.algorithm} ${c.message}`, () => {
@@ -139,7 +145,7 @@ describe('requests', () => {
       }
       expect(body['hash']).toBe(
         crypto.hmacSha256(
-          partner.partnerId + body['request_data'] + file.request_time,
+          partner.partnerId + (body['request_data'] ?? '') + file.request_time,
           partner.partnerKey,
         ),
       );

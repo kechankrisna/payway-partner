@@ -63,7 +63,5 @@ final class Json
         return \is_array($value) ? $value : [];
     }
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

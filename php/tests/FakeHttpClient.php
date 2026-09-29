@@ -14,9 +14,7 @@ final class FakeHttpClient implements HttpClient
     public array $requests = [];
 
     /** @param \Closure(string, array<string, string>, string): HttpResponse $reply */
-    public function __construct(private readonly \Closure $reply)
-    {
-    }
+    public function __construct(private readonly \Closure $reply) {}
 
     public function post(string $url, array $headers, string $body): HttpResponse
     {

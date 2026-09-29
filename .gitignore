@@ -9,6 +9,7 @@
 # PHP
 /vendor/
 /.phpunit.cache/
+.php-cs-fixer.cache
 
 # Node
 node_modules/

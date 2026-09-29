@@ -3,10 +3,19 @@
     "description": "ABA PayWay partner API client for PHP. Register merchants, decrypt the pushback and inquire merchant info.",
     "type": "library",
     "license": "MIT",
-    "keywords": ["aba", "payway", "cambodia", "payment", "partner", "sdk"],
+    "keywords": [
+        "aba",
+        "payway",
+        "cambodia",
+        "payment",
+        "partner",
+        "sdk"
+    ],
     "homepage": "https://github.com/kechankrisna/payway-partner/tree/main/php",
     "authors": [
-        {"name": "Ke Chankrisna"}
+        {
+            "name": "Ke Chankrisna"
+        }
     ],
     "support": {
         "issues": "https://github.com/kechankrisna/payway-partner/issues",
@@ -26,20 +35,27 @@
         "ext-curl": "Needed by the built-in HTTP client, unless you pass a PSR-18 client"
     },
     "autoload": {
-        "psr-4": {"Kechankrisna\\PaywayPartner\\": "php/src/"}
+        "psr-4": {
+            "Kechankrisna\\PaywayPartner\\": "php/src/"
+        }
     },
     "autoload-dev": {
-        "psr-4": {"Kechankrisna\\PaywayPartner\\Tests\\": "php/tests/"}
+        "psr-4": {
+            "Kechankrisna\\PaywayPartner\\Tests\\": "php/tests/"
+        }
     },
     "scripts": {
         "test": "phpunit -c php/phpunit.xml.dist",
         "test:unit": "phpunit -c php/phpunit.xml.dist --exclude-group integration",
-        "analyse": "phpstan analyse -c php/phpstan.neon"
+        "analyse": "phpstan analyse -c php/phpstan.neon",
+        "cs": "php-cs-fixer check --diff",
+        "cs:fix": "php-cs-fixer fix"
     },
     "config": {
         "sort-packages": true
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3",
         "nyholm/psr7": "^1.8",
         "phpstan/phpstan": "^2",
         "phpunit/phpunit": "^12"

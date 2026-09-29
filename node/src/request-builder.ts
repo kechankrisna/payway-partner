@@ -54,7 +54,10 @@ export class PaywayPartnerRequestBuilder {
   }
 
   /** body of `get-mc-credential-info` */
-  checkMerchant(request: CheckMerchantRequest, requestTime?: string): SignedBody {
+  checkMerchant(
+    request: CheckMerchantRequest,
+    requestTime?: string,
+  ): SignedBody {
     return this.signedBody({ register_ref: request.registerRef }, requestTime);
   }
 

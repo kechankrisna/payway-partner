@@ -173,12 +173,24 @@ export const PaywayPartnerStatusCode = {
 
 type Json = Record<string, unknown>;
 
-/** values documented as strings are read with String() so numbers work */
-const str = (value: unknown): string =>
-  value === undefined || value === null ? '' : String(value);
+/**
+ * Values documented as strings are read as strings, so a number (e.g. an
+ * account or mid) does not break parsing; objects and arrays count as absent.
+ */
+const optionalStr = (value: unknown): string | undefined => {
+  switch (typeof value) {
+    case 'string':
+      return value;
+    case 'number':
+    case 'boolean':
+    case 'bigint':
+      return String(value);
+    default:
+      return undefined;
+  }
+};
 
-const optionalStr = (value: unknown): string | undefined =>
-  value === undefined || value === null ? undefined : String(value);
+const str = (value: unknown): string => optionalStr(value) ?? '';
 
 /** PHP encodes an empty associative array as `[]` */
 const methods = (value: unknown): Record<string, string> =>

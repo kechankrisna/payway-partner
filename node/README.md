@@ -7,12 +7,12 @@ runtime dependencies (uses the built-in `fetch` and `node:crypto`).
 npm install @kechankrisna/payway-partner
 ```
 
-| Feature | Method |
-|---|---|
-| Register a merchant | `registerMerchant` |
-| Receive the pushback on your `pushback_url` | `decryptPushback` |
-| Inquiry merchant info via register ref | `checkMerchant` + `decryptMerchantCredential` |
-| Inquiry merchant info via merchant public key | `getMcInfo` + `decryptMcInfo` |
+| Feature                                       | Method                                        |
+| --------------------------------------------- | --------------------------------------------- |
+| Register a merchant                           | `registerMerchant`                            |
+| Receive the pushback on your `pushback_url`   | `decryptPushback`                             |
+| Inquiry merchant info via register ref        | `checkMerchant` + `decryptMerchantCredential` |
+| Inquiry merchant info via merchant public key | `getMcInfo` + `decryptMcInfo`                 |
 
 ## Setup
 
@@ -73,7 +73,8 @@ if (byRef.isSuccess) {
   const credential = payway.decryptMerchantCredential(byRef.data);
 
   const byKey = await payway.getMcInfo(toGetMcInfoRequest(credential));
-  if (byKey.isSuccess) console.log(payway.decryptMcInfo(byKey.data).enabledPaymentMethods);
+  if (byKey.isSuccess)
+    console.log(payway.decryptMcInfo(byKey.data).enabledPaymentMethods);
 }
 ```
 
@@ -89,7 +90,10 @@ if (byRef.isSuccess) {
 
 ```ts
 try {
-  await payway.checkMerchant({ registerRef }, { signal: AbortSignal.timeout(10_000) });
+  await payway.checkMerchant(
+    { registerRef },
+    { signal: AbortSignal.timeout(10_000) },
+  );
 } catch (error) {
   if (error instanceof PaywayPartnerError && error.isRetryable) {
     // retry later
@@ -102,9 +106,9 @@ try {
 ```ts
 new PaywayPartnerService({
   partner,
-  fetch: myFetch,              // any fetch-compatible client
-  clock: () => new Date(),     // source of request_time
-  crypto: myCrypto,            // implements PaywayPartnerCrypto
+  fetch: myFetch, // any fetch-compatible client
+  clock: () => new Date(), // source of request_time
+  crypto: myCrypto, // implements PaywayPartnerCrypto
   logger: (line) => log.debug(line), // nothing is logged without it
   timeoutMs: 30_000,
 });

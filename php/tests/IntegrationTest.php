@@ -29,8 +29,8 @@ final class IntegrationTest extends TestCase
             self::markTestSkipped('no .env with ABA sandbox credentials');
         }
         $env = parse_ini_file(self::ENV_FILE, false, INI_SCANNER_RAW) ?: [];
-        $get = static fn (string $key): string => \is_string($env[$key] ?? null) ? $env[$key] : '';
-        $pem = static fn (string $key): string => (string) base64_decode($get($key), true);
+        $get = static fn(string $key): string => \is_string($env[$key] ?? null) ? $env[$key] : '';
+        $pem = static fn(string $key): string => (string) base64_decode($get($key), true);
 
         return new PaywayPartnerService(new PaywayPartner(
             $get('ABA_PARTNER_NAME'),

@@ -20,8 +20,8 @@ final readonly class GetMcInfoRequest
     public function __construct(
         public string $merchantKey,
         public string $currency,
-        #[\SensitiveParameter] public string $publicKey,
+        #[\SensitiveParameter]
+        public string $publicKey,
         public ?string $rsaPublicKey = null,
-    ) {
-    }
+    ) {}
 }

@@ -207,9 +207,9 @@ final class VectorsTest extends TestCase
         $status = $c['http_status'];
         $service = new PaywayPartnerService(
             Support::partner(),
-            Support::fakeHttp(static fn (): HttpResponse => new HttpResponse($status, $raw)),
+            Support::fakeHttp(static fn(): HttpResponse => new HttpResponse($status, $raw)),
         );
-        $call = static fn () => match ($c['endpoint']) {
+        $call = static fn() => match ($c['endpoint']) {
             'register_merchant' => $service->registerMerchant(new RegisterMerchantRequest('p', 'r', 'x', 'USD')),
             'check_merchant' => $service->checkMerchant(new CheckMerchantRequest('x')),
             'get_mc_info' => $service->getMcInfo(new GetMcInfoRequest('k', 'USD', 'p')),

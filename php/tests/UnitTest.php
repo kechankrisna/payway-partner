@@ -34,11 +34,11 @@ final class UnitTest extends TestCase
 
     public function testPostsJsonWithHeadersAndTheInjectedClock(): void
     {
-        $http = Support::fakeHttp(static fn (): HttpResponse => new HttpResponse(
+        $http = Support::fakeHttp(static fn(): HttpResponse => new HttpResponse(
             200,
             '{"url":"https://payway.test/self-register","token":"t","status":{"code":"00","message":"Success!"}}',
         ));
-        $clock = new class () implements ClockInterface {
+        $clock = new class implements ClockInterface {
             public function now(): \DateTimeImmutable
             {
                 return new \DateTimeImmutable('2026-01-02T03:04:05Z');
@@ -59,7 +59,7 @@ final class UnitTest extends TestCase
 
     public function testLogsToTheInjectedLogger(): void
     {
-        $logger = new class () extends AbstractLogger {
+        $logger = new class extends AbstractLogger {
             /** @var list<string> */
             public array $lines = [];
 
@@ -70,7 +70,7 @@ final class UnitTest extends TestCase
         };
         $service = new PaywayPartnerService(
             Support::partner(),
-            Support::fakeHttp(static fn (): HttpResponse => self::notFound()),
+            Support::fakeHttp(static fn(): HttpResponse => self::notFound()),
             logger: $logger,
         );
 
@@ -83,7 +83,7 @@ final class UnitTest extends TestCase
 
     public function testPsr18NetworkErrorsAreRetryableConnectionErrors(): void
     {
-        $client = new class () implements ClientInterface {
+        $client = new class implements ClientInterface {
             public function sendRequest(RequestInterface $request): ResponseInterface
             {
                 throw new class ('offline') extends \RuntimeException implements NetworkExceptionInterface {
@@ -109,7 +109,7 @@ final class UnitTest extends TestCase
 
     public function testPsr18ClientSendsTheRequest(): void
     {
-        $client = new class () implements ClientInterface {
+        $client = new class implements ClientInterface {
             public ?RequestInterface $request = null;
 
             public function sendRequest(RequestInterface $request): ResponseInterface
@@ -154,7 +154,7 @@ final class UnitTest extends TestCase
 
         $lines = array_filter(
             explode("\n", Support::fixture('rsa_1024_public.pem')),
-            static fn (string $l): bool => $l !== '' && !str_starts_with($l, '-----'),
+            static fn(string $l): bool => $l !== '' && !str_starts_with($l, '-----'),
         );
         $bare = implode('', $lines);
         self::assertSame('hi', $crypto->decryptString($crypto->encryptString('hi', $bare), Support::partner()->partnerPrivateKey));

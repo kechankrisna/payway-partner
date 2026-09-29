@@ -19,7 +19,8 @@ describe.skipIf(!existsSync(envFile))('ABA PayWay sandbox', () => {
   beforeAll(() => {
     process.loadEnvFile(envFile);
     const env = (key: string) => process.env[key] ?? '';
-    const pem = (key: string) => Buffer.from(env(key), 'base64').toString('utf8');
+    const pem = (key: string) =>
+      Buffer.from(env(key), 'base64').toString('utf8');
     service = new PaywayPartnerService({
       partner: {
         partnerName: env('ABA_PARTNER_NAME'),
@@ -68,7 +69,9 @@ describe.skipIf(!existsSync(envFile))('ABA PayWay sandbox', () => {
     const wrongKey = new PaywayPartnerService({
       partner: { ...service.partner, partnerKey: 'wrong-key' },
     });
-    const response = await wrongKey.checkMerchant({ registerRef: 'mylekha003' });
+    const response = await wrongKey.checkMerchant({
+      registerRef: 'mylekha003',
+    });
     expect(response.status.code).toBe(PaywayPartnerStatusCode.wrongHash);
   });
 });

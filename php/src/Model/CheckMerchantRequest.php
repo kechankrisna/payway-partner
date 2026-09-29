@@ -10,8 +10,7 @@ final readonly class CheckMerchantRequest
     /** @param string $registerRef the `registerRef` used when registering the merchant */
     public function __construct(
         public string $registerRef,
-    ) {
-    }
+    ) {}
 
     /**
      * The `request_data` payload, with PayWay's field names.

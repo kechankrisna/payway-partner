@@ -1,16 +1,29 @@
-# example
+# payway_partner example
 
-A new Flutter project.
+A Flutter demo of the [`payway_partner`](https://pub.dev/packages/payway_partner)
+SDK against the ABA PayWay **sandbox**: register a merchant, inquire merchant
+info via register ref, and via merchant public key. Results are printed to the
+debug console.
 
-## Getting Started
+> Demo only. This app embeds partner keys to call PayWay directly. In
+> production, run `PaywayPartnerService` on your server and never ship the
+> partner key or private key inside an app.
 
-This project is a starting point for a Flutter application.
+## Run
 
-A few resources to get you started if this is your first Flutter project:
+1. Put your sandbox credentials in the repository's `.env` (copy
+   `.env.example` at the repository root).
+2. Run the app with those values as compile-time defines:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```sh
+flutter run --dart-define-from-file=../../.env
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Optional defines for the "get mc info" button: `ABA_MERCHANT_KEY`,
+`ABA_MERCHANT_CURRENCY` and `ABA_MERCHANT_PUBLIC_KEY`.
+
+## Test
+
+```sh
+flutter test
+```

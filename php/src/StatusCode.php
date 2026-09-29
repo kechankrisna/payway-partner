@@ -52,7 +52,5 @@ final class StatusCode
     /** `PTL175` Requested Domain is not in whitelist */
     public const string DOMAIN_NOT_WHITELISTED = 'PTL175';
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

@@ -25,8 +25,7 @@ final readonly class MerchantInfo
         public array $availablePaymentMethods = [],
         public array $enabledPaymentMethods = [],
         public array $pendingPaymentMethods = [],
-    ) {
-    }
+    ) {}
 
     /**
      * Parses decrypted PayWay JSON.

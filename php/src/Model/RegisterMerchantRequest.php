@@ -23,8 +23,7 @@ final readonly class RegisterMerchantRequest
         public string $currency,
         public int $type = 0,
         public ?int $merchantType = null,
-    ) {
-    }
+    ) {}
 
     /**
      * The `request_data` payload, with PayWay's field names.

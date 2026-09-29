@@ -30,6 +30,8 @@ jobs:
       - run: composer validate --strict
       - run: composer install --no-progress
       - run: composer audit
+      - name: Code style (PER-CS)
+        run: composer cs
       - run: composer analyse
       - name: Unit tests and shared vectors
         run: composer test:unit

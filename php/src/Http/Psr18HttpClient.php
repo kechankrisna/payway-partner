@@ -27,8 +27,7 @@ final class Psr18HttpClient implements HttpClient
         private readonly ClientInterface $client,
         private readonly RequestFactoryInterface $requestFactory,
         private readonly StreamFactoryInterface $streamFactory,
-    ) {
-    }
+    ) {}
 
     public function post(string $url, array $headers, string $body): HttpResponse
     {

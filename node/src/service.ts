@@ -198,7 +198,7 @@ export class PaywayPartnerService {
   ): Promise<T> {
     const url = new URL(path, this.partner.baseApiUrl);
     const payload = JSON.stringify(body);
-    this.#logger?.(`[PayWay] POST ${url} ${payload}`);
+    this.#logger?.(`[PayWay] POST ${url.href} ${payload}`);
 
     const timeout = AbortSignal.timeout(this.#timeoutMs);
     const signal = options.signal
@@ -222,7 +222,7 @@ export class PaywayPartnerService {
       throw new PaywayPartnerError(type, message, { cause: error });
     }
 
-    this.#logger?.(`[PayWay] ${status} ${text}`);
+    this.#logger?.(`[PayWay] ${String(status)} ${text}`);
     const json = statusBody(text);
     if (json !== undefined) return parse(json);
     throw new PaywayPartnerError(

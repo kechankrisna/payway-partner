@@ -29,13 +29,14 @@ final readonly class PaywayPartner
     public function __construct(
         public string $partnerName,
         public string $partnerId,
-        #[\SensitiveParameter] public string $partnerKey,
-        #[\SensitiveParameter] public string $partnerPrivateKey,
+        #[\SensitiveParameter]
+        public string $partnerKey,
+        #[\SensitiveParameter]
+        public string $partnerPrivateKey,
         public string $partnerPublicKey,
         public string $partnerReferer,
         public string $baseApiUrl = self::SANDBOX_URL,
-    ) {
-    }
+    ) {}
 
     /** Returns a copy with the given fields replaced. */
     public function with(

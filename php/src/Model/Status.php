@@ -22,8 +22,7 @@ final readonly class Status
         public ?string $tranId = null,
         public ?string $traceId = null,
         public ?string $correlationId = null,
-    ) {
-    }
+    ) {}
 
     /** Whether PayWay answered `00` (success). */
     public function isSuccess(): bool
@@ -60,6 +59,6 @@ final readonly class Status
             'tran_id' => $this->tranId,
             'trace_id' => $this->traceId,
             'correlation_id' => $this->correlationId,
-        ], static fn (?string $value): bool => $value !== null);
+        ], static fn(?string $value): bool => $value !== null);
     }
 }

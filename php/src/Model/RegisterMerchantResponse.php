@@ -16,8 +16,7 @@ final readonly class RegisterMerchantResponse
         public string $url,
         public string $token,
         public Status $status,
-    ) {
-    }
+    ) {}
 
     /** Whether PayWay answered `00` (success). */
     public function isSuccess(): bool

@@ -70,7 +70,7 @@ export class NodePaywayPartnerCrypto implements PaywayPartnerCrypto {
     const source = Buffer.from(data, 'base64');
     if (source.length === 0 || source.length % blockSize !== 0) {
       throw new RangeError(
-        `encrypted data is not a multiple of the ${blockSize} byte key size`,
+        `encrypted data is not a multiple of the ${String(blockSize)} byte key size`,
       );
     }
     const blocks: Buffer[] = [];

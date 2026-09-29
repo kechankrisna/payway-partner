@@ -68,3 +68,5 @@ jobs:
         working-directory: dart/example
       - run: flutter analyze
         working-directory: dart/example
+      - run: flutter test
+        working-directory: dart/example

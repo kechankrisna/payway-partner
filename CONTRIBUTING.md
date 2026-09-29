@@ -20,6 +20,7 @@ repository: it is confidential to partners.
 ```sh
 # Dart
 cd dart && dart pub get
+dart format lib test tool       # formatting
 dart test -x integration        # offline
 dart test                       # offline + sandbox
 
@@ -27,12 +28,15 @@ dart test                       # offline + sandbox
 cd node && npm ci
 npm run test:unit               # offline
 npm test                        # offline + sandbox
+npm run lint                    # ESLint (strict, type-checked)
+npm run format                  # Prettier
 
 # PHP (from the repository root)
 composer install
 composer test:unit              # offline
 composer test                   # offline + sandbox
 composer analyse                # PHPStan, level max
+composer cs                     # code style (PER-CS); composer cs:fix to apply
 ```
 
 ## CI

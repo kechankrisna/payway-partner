@@ -18,8 +18,7 @@ final readonly class InquiryResponse
     public function __construct(
         public string $data,
         public Status $status,
-    ) {
-    }
+    ) {}
 
     /** Whether PayWay answered `00` (success). */
     public function isSuccess(): bool

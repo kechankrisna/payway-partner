@@ -14,3 +14,4 @@
 /php/phpstan.neon   export-ignore
 /CONTRIBUTING.md    export-ignore
 /composer.lock      export-ignore
+/.php-cs-fixer.dist.php export-ignore

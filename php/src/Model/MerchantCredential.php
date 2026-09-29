@@ -25,12 +25,12 @@ final readonly class MerchantCredential
         public string $merchantName,
         public string $mid,
         public string $merchantKey,
-        #[\SensitiveParameter] public string $publicKey,
+        #[\SensitiveParameter]
+        public string $publicKey,
         public string $registerRef,
         public string $currency,
         public string $rsaPublicKey,
-    ) {
-    }
+    ) {}
 
     /**
      * Parses decrypted PayWay JSON.

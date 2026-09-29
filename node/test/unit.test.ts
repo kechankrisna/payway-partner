@@ -104,9 +104,13 @@ describe('PaywayPartnerService with an injected fetch', () => {
       fetch: fakeFetch(
         (request) =>
           new Promise((_, reject) => {
-            request.signal.addEventListener('abort', () =>
-              reject(request.signal.reason),
-            );
+            request.signal.addEventListener('abort', () => {
+              reject(
+                request.signal.reason instanceof Error
+                  ? request.signal.reason
+                  : new Error('aborted'),
+              );
+            });
           }),
       ),
     });
