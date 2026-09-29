@@ -35,7 +35,7 @@ jobs:
           fi
 
       - name: Formatting
-        run: dart format --output=none --set-exit-if-changed lib test tool example/lib
+        run: dart format --output=none --set-exit-if-changed lib test tool
       - run: dart analyze --fatal-infos
       - name: Unit tests and shared vectors
         run: dart test -x integration
@@ -59,6 +59,8 @@ jobs:
         with:
           channel: stable
       - run: flutter pub get
+        working-directory: dart/example
+      - run: dart format --output=none --set-exit-if-changed lib
         working-directory: dart/example
       - run: flutter analyze
         working-directory: dart/example
