@@ -13,5 +13,6 @@
 /php/phpunit.xml.dist export-ignore
 /php/phpstan.neon   export-ignore
 /CONTRIBUTING.md    export-ignore
+/CLAUDE.md          export-ignore
 /composer.lock      export-ignore
 /.php-cs-fixer.dist.php export-ignore
