@@ -1,6 +1,9 @@
 include: package:lints/recommended.yaml
 
 analyzer:
+  # example/ is a Flutter app with its own analysis, run by the example CI job
+  exclude:
+    - example/**
   language:
     strict-casts: true
     strict-raw-types: true
