@@ -22,7 +22,8 @@ jobs:
       - uses: dart-lang/setup-dart@v1
         with:
           sdk: stable
-      - run: dart pub get
+      # example/ is a Flutter app, analyzed by the example job
+      - run: dart pub get --no-example
 
       - name: Generated code is up to date
         run: |
